@@ -1,8 +1,10 @@
-pub resource NFTMinter {
+access(all)
+resource NFTMinter {
 
     // mintNFT mints a new NFT with a new ID
-    // and deposit it in the recipients collection using their collection reference
-    pub fun mintNFT(
+    // and deposits it in the recipient's collection using their collection reference
+    access(all)
+    fun mintNFT(
         recipient: &{NonFungibleToken.CollectionPublic},
         name: String,
         description: String,
@@ -11,8 +13,8 @@ pub resource NFTMinter {
         will: String,
         determination: String
     ) {
-        // create a new NFT
-        var newNFT <- create NFT(
+        // Create a new NFT
+        let newNFT <- create NFT(
             id: NewExampleNFT.totalSupply,
             name: name,
             description: description,
@@ -22,9 +24,10 @@ pub resource NFTMinter {
             determination: determination
         )
 
-        // deposit it in the recipient's account using their reference
+        // Deposit it in the recipient's account using their reference
         recipient.deposit(token: <-newNFT)
 
+        // Increment the total supply of NFTs
         NewExampleNFT.totalSupply = NewExampleNFT.totalSupply + (1 as UInt64)
     }
 }
