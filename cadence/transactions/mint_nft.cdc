@@ -30,6 +30,15 @@ transaction {
             determination: "Unstoppable Determination"
         )
 
-        log("Minted and deposited a hardcoded NFT into the signer's collection.")
+        log(
+            "Minted NFT with ID: ".concat(newNFT.id.toString())
+            .concat(" and metadata: ")
+            .concat("{name: Hardcoded NFT Name, description: This is a hardcoded description}")
+        )
+
+        log(
+            "Deposited NFT with ID: ".concat(newNFT.id.toString())
+            .concat(" into the signer's collection.")
+        )
     }
 }
