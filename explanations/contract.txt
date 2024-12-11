@@ -1,3 +1,3 @@
 The Recipe contract facilitates the minting of NFTs by leveraging the NFTMinter resource from the ExampleNFT contract, which implements the Flow NFT standard. To use the Recipe contract, the ExampleNFT contract must define an NFT resource with metadata like name, description, and thumbnail, and the recipient account must have a linked collection capable of receiving and storing NFTs. The contract uses the NFTMinter resource to create new tokens and deposits them directly into the recipient's collection. 
 
-To see how to link a Collection Interface to an account, check out the linking collections example.
+To see how to link a Collection Interface to an account, check out the linking collections example: https://github.com/onflow/collection-for-holding-nfts.
