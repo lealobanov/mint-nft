@@ -2,50 +2,32 @@ import "ExampleNFT"
 import "NonFungibleToken"
 
 access(all) contract Recipe {
-    access(all) let MinterStoragePath: StoragePath
-    access(all) let CollectionPublicPath: PublicPath
+    access(all) let ExampleNFTMinterPath: StoragePath
 
-    // Initialize the paths and the NFTMinter resource
     init() {
-        self.MinterStoragePath = /storage/RecipeNFTMinter
-        self.CollectionPublicPath = /public/RecipeNFTCollection
-
-        // Create and store an NFTMinter resource in storage
-        let minter <- create NFTMinter()
-        self.account.storage.save(<-minter, to: self.MinterStoragePath)
-
-        // Create a Collection and publish its capability
-        let collection <- ExampleNFT.createEmptyCollection()
-        self.account.storage.save(<-collection, to: /storage/RecipeNFTCollection)
-        let cap = self.account.capabilities.storage.issue<&{NonFungibleToken.CollectionPublic}>(
-            /storage/RecipeNFTCollection
-        )
-        self.account.capabilities.publish(cap, at: self.CollectionPublicPath)
+        // Reference the storage path where ExampleNFT stores its NFTMinter
+        self.ExampleNFTMinterPath = /storage/exampleNFTMinter
     }
 
-    access(all) resource NFTMinter {
-        /// Mint and deposit a new NFT
-        access(all)
-        fun mintNFT(
-            recipient: &{NonFungibleToken.CollectionPublic},
-            name: String,
-            description: String,
-            thumbnail: String,
-            power: String,
-            will: String,
-            determination: String
-        ) {
-            let newNFT <- ExampleNFT.mintNFT()
-            let metadata: {String: String} = {
-                "name": name,
-                "description": description,
-                "thumbnail": thumbnail,
-                "power": power,
-                "will": will,
-                "determination": determination
-            }
+    access(all) fun mintNFT(
+        recipient: &{NonFungibleToken.CollectionPublic},
+        name: String,
+        description: String,
+        thumbnail: String
+    ) {
+        // Borrow the ExampleNFT.NFTMinter resource
+        let minterRef = self.account.storage.borrow<&ExampleNFT.NFTMinter>(from: self.ExampleNFTMinterPath)
+            ?? panic("Could not borrow reference to the ExampleNFT NFTMinter")
 
-            recipient.deposit(token: <-newNFT)
-        }
+        // Call the ExampleNFT.NFTMinter's mintNFT function
+        let newNFT <- minterRef.mintNFT(
+            name: name,
+            description: description,
+            thumbnail: thumbnail,
+            royalties: []
+        )
+
+        // Deposit the minted NFT into the recipient's collection
+        recipient.deposit(token: <-newNFT)
     }
 }

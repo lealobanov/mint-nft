@@ -105,8 +105,9 @@
 	"deployments": {
 		"emulator": {
 			"emulator-account": [
-				"Recipe",
-				"ExampleNFT"
+				"ExampleNFT",
+				"Recipe"
+				
 			]
 		}
 	}
