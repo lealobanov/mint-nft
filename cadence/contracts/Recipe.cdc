@@ -45,9 +45,7 @@ access(all) contract Recipe {
                 "determination": determination
             }
 
-            log("Minted NFT with ID: \(newNFT.id) and metadata: \(metadata)")
             recipient.deposit(token: <-newNFT)
-            log("Deposited NFT with ID: \(newNFT.id) into recipient's collection.")
         }
     }
 }
