@@ -8,8 +8,8 @@ access(all) fun testExample() {
 access(all)
 fun setup() {
     let err = Test.deployContract(
-        name: "Recipe",
-        path: "../contracts/Recipe.cdc",
+        name: "ExampleNFT",
+        path: "../contracts/ExampleNFT.cdc",
         arguments: [],
     )
 

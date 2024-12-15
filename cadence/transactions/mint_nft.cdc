@@ -1,5 +1,4 @@
 import "NonFungibleToken"
-import "Recipe"
 import "ExampleNFT"
 
 transaction {
@@ -9,7 +8,7 @@ transaction {
     prepare(signer: auth(Storage, Capabilities) &Account) {
         // Borrow the ExampleNFT.NFTMinter reference
         self.minter = signer.storage.borrow<&ExampleNFT.NFTMinter>(
-            from: Recipe.ExampleNFTMinterPath
+            from: /storage/exampleNFTMinter
         ) ?? panic("Could not borrow a reference to the ExampleNFT NFTMinter")
 
         // Borrow the signer's NFT collection reference
