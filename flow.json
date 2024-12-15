@@ -1,11 +1,5 @@
 {
 	"contracts": {
-		"Recipe": {
-			"source": "./cadence/contracts/Recipe.cdc",
-			"aliases": {
-				"emulator": "f8d6e0586b0a20c7"
-			}
-		},
 		"ExampleNFT": {
 			"source": "./cadence/contracts/ExampleNFT.cdc",
 			"aliases": {
@@ -105,9 +99,7 @@
 	"deployments": {
 		"emulator": {
 			"emulator-account": [
-				"ExampleNFT",
-				"Recipe"
-				
+				"ExampleNFT"
 			]
 		}
 	}
