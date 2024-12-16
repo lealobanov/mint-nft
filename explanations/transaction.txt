@@ -1,5 +1,3 @@
-This transaction is used to mint an NFT from the account that has the minting resource saved to it. You are able to give other users minting rights, check out the Admin Minting example for that.
+This transaction is designed to mint an NFT using the minting resource stored in a specified account. It begins by identifying the recipient of the NFT and verifying that their account has the necessary capability to store NFTs in their collection. Once confirmed, the transaction borrows the minting resource from the account that holds it and uses it to mint a new NFT. The minted NFT is then deposited into the recipient's collection. This ensures that only accounts with the proper setup can receive NFTs and that minting operations are securely executed.
 
-In this case you are defining who is the person that will be receiving the NFT and checking if they actually have the capability to store the NFT in their collection before moving forward. As well as borrowing the Minting resource to mint new NFTS that should be in the account that has the minter saved.
-
-At the end you are executing the transaction and minting the NFT.
+For granting minting rights to other accounts, refer to the Admin Minting example.
